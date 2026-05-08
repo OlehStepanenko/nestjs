@@ -10,27 +10,27 @@ export class UsersController {
     }
 
     @Post()
-    create(@Body() data: CreateUserDto): ViewUserDto {
+    create(@Body() data: CreateUserDto): Promise<ViewUserDto> {
         return this.usersService.create(data);
     }
 
     @Get()
-    get(): ViewUserDto[] {
+    get(): Promise<ViewUserDto[]> {
         return this.usersService.get()
     }
 
     @Get(':id')
-    getOne(@Param() {id}: IdParamDto): ViewUserDto {
+    getOne(@Param() {id}: IdParamDto): Promise<ViewUserDto> {
         return this.usersService.getOne(id)
     }
 
     @Put(':id')
-    update(@Body() data: CreateUserDto, @Param() {id}: IdParamDto): ViewUserDto {
+    update(@Body() data: CreateUserDto, @Param() {id}: IdParamDto): Promise<ViewUserDto> {
         return this.usersService.update(id, data);
     }
 
     @Post(':id/ban')
-    ban(@Param() {id}: IdParamDto, @Body() data: BanUserDto): ViewUserDto {
+    ban(@Param() {id}: IdParamDto, @Body() data: BanUserDto): Promise<ViewUserDto> {
         return this.usersService.ban(id, data);
     }
 }
