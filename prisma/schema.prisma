@@ -23,16 +23,26 @@ enum UserStatus {
   @@map("user_status")
 }
 
+model PasswordReset {
+  userId String @id @db.Uuid @map("user_id")
+  user User @relation(fields: [userId], references: [id])
+  attempts Int @db.Integer @default(0)
+  code String @db.VarChar()
+  createdAt DateTime @db.Timestamptz() @map("created_at") @default(now())
+  expiresAt DateTime @db.Timestamptz() @map("expires_at")
+}
+
 model User {
   id        String     @db.Uuid @id
   role      UserRole
   firstName String     @map("first_name") @db.VarChar()
   lastName  String     @map("last_name") @db.VarChar()
-  email     String     @db.VarChar()
+  email     String     @db.VarChar() @unique
   hash      String?    @db.VarChar()
   status    UserStatus
   createdAt DateTime   @map("created_at") @db.Timestamptz() @default(now())
   createdBy String     @db.Uuid @map("created_by")
+  passwordReset PasswordReset?
 
   @@map("user")
 }
