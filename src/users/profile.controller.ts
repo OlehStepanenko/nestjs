@@ -15,13 +15,13 @@ export class ProfileController {
 
     @Post('reset')
     @HttpCode(HttpStatus.NO_CONTENT)
-    resetPassword(@Body() data: ResetPasswordDto): void {
-
+    resetPassword(@Body() {email}: ResetPasswordDto): Promise<void> {
+        return this.profileService.resetPassword(email)
     }
 
     @Post('password')
     @HttpCode(HttpStatus.NO_CONTENT)
-    setPassword(@Body() data: SetPasswordDTO ): void {
-
+    setPassword(@Body() data: SetPasswordDTO ): Promise<void> {
+        return this.profileService.setPassword(data)
     }
 }
