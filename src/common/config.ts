@@ -38,7 +38,7 @@ const scheme = convict({
             },
         }
     },
-    frontend: {
+    frontend:   {
         baseUrl: {
             doc: 'Frontend application base URL',
             format: String,
@@ -79,6 +79,32 @@ const scheme = convict({
                 env: 'PASSWORD_RESET_ATTEMTS',
             }
         }
+    },
+    seedUser: {
+        email: {
+            doc: 'Initial user email',
+            format: String,
+            default: '',
+            env: 'USER_EMAIL',
+        },
+        password: {
+            doc: 'Initial user password',
+            format: String,
+            default: '',
+            env: 'USER_PASSWORD',
+        },
+        firstName: {
+            doc: 'Initial user first name',
+            format: String,
+            default: '',
+            env: 'USER_FIRST_NAME',
+        },
+        lastName: {
+            doc: 'Initial user last name',
+            format: String,
+            default: '',
+            env: 'USER_LAST_NAME',
+        },
     }
 })
 
