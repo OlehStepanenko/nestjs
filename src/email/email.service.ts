@@ -1,15 +1,7 @@
 import {Injectable} from "@nestjs/common";
-import {createTransport, SendMailOptions, Transporter} from "nodemailer";
-import {config} from 'src/common';
+import {SendMailOptions} from "nodemailer";
 
 @Injectable()
-export class EmailService {
-    private  readonly transporter: Transporter;
-    constructor() {
-        this.transporter = createTransport(config.email)
-    }
-
-    public async send(options: SendMailOptions): Promise<void> {
-        await this.transporter.sendMail(options);
-    }
+export abstract class EmailService {
+    public abstract send(options: SendMailOptions): Promise<void>
 }
