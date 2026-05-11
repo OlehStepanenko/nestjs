@@ -3,10 +3,12 @@ import {ForbiddenException, Injectable} from "@nestjs/common";
 import {PasswordResetService} from "./password-reset.service";
 import {PrismaService} from "../prisma";
 import {UserStatus} from "../../generated/prisma/enums";
+import {HelloEmailService} from "../email";
 
 @Injectable()
 export class ProfileService {
     constructor(
+        private readonly helloEmailService: HelloEmailService,
         private readonly passwordResetService: PasswordResetService,
         private readonly prisma: PrismaService
     ) {
@@ -32,7 +34,13 @@ export class ProfileService {
             throw new ForbiddenException('Account is banned')
         }
 
-        await this.passwordResetService.createOrReplace(user.id, user.email)
+        const reset = await this.passwordResetService.createOrReplace(user.id)
+
+        await this.helloEmailService.send({
+            ...reset,
+            email: user.email,
+            name: user.firstName
+        })
     }
 
     public async setPassword({email, password, code}: SetPasswordDTO): Promise<void> {

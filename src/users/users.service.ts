@@ -6,12 +6,14 @@ import {mapUserRoleFromDB, mapUserRoleToDB} from "./mappers";
 import {UserViewMapper} from "./mappers";
 import {UserStatus} from "../../generated/prisma/enums";
 import {PasswordResetService} from "./password-reset.service";
+import {HelloEmailService} from "../email";
 
 @Injectable()
 export class UsersService {
     private readonly mapper = new UserViewMapper()
 
     constructor(
+        private readonly helloEmailService: HelloEmailService,
         private readonly passwordResetService: PasswordResetService,
         private readonly prisma: PrismaService
     ) {
@@ -31,8 +33,12 @@ export class UsersService {
             }
         })
 
-        await this.passwordResetService.createOrReplace(user.id, user.email)
-
+        const reset = await this.passwordResetService.createOrReplace(user.id)
+        await this.helloEmailService.send({
+            ...reset,
+            email: user.email,
+            name: user.firstName
+        })
         return this.mapper.mapOne(user)
     }
 

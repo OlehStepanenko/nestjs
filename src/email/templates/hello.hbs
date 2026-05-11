@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Создайте пароль</title>
+    <style type="text/css">
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f4f7f6; font-family: Arial, Helvetica, sans-serif; }
+
+        @media screen and (max-width: 600px) {
+            .email-container { width: 100% !important; }
+            .mobile-padding { padding-left: 20px !important; padding-right: 20px !important; }
+            .mobile-text { font-size: 15px !important; line-height: 22px !important; }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f7f6;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+    <tr>
+        <td align="center" class="mobile-padding" style="padding: 40px 40px 30px; background-color: #ffffff;">
+            <h1 style="margin: 0 0 20px; font-size: 26px; line-height: 34px; color: #1a1a1a; font-weight: bold; text-align: center;">
+                Приветствуем вас, {{name}}!
+            </h1>
+
+            <p class="mobile-text" style="margin: 0 0 25px; font-size: 16px; line-height: 24px; color: #4a4a4a; text-align: center;">
+                Спасибо, что выбрали наш сервис. Для завершения регистрации и защиты вашего аккаунта, пожалуйста, перейдите по ссылке ниже и создайте надёжный пароль.
+            </p>
+
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 30px auto;">
+                <tr>
+                    <td style="border-radius: 8px; background-color: #0066cc;">
+                        <a href="{{link}}" target="_blank" style="display: inline-block; padding: 14px 32px; font-size: 16px; font-weight: bold; color: #ffffff; text-decoration: none; border-radius: 8px; background-color: #0066cc;">
+                            Создать пароль
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+            <p style="margin: 0 0 30px; font-size: 13px; line-height: 20px; color: #666666; text-align: center; word-break: break-all;">
+                Если кнопка не нажимается, скопируйте ссылку в браузер:<br>
+                <a href="{{reset_link}}" style="color: #0066cc; text-decoration: none;">{{link}}</a>
+            </p>
+
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 25px;">
+                <tr>
+                    <td style="padding: 15px; background-color: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; text-align: center;">
+                        <p style="margin: 0; font-size: 14px; line-height: 20px; color: #856404;">
+                            ⏳ <strong>Важно:</strong> Ссылка действительна в течение <strong>{{expiration}}</strong>.<br>
+                            По истечении этого срока вам потребуется запросить новую ссылку для создания пароля.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+            <p class="mobile-text" style="margin: 0; font-size: 14px; line-height: 22px; color: #777777; text-align: center;">
+                Если вы не регистрировались у нас, просто проигнорируйте это письмо. Ваш аккаунт не будет создан.
+            </p>
+        </td>
+    </tr>
+
+    <tr>
+        <td align="center" style="padding: 30px 40px; background-color: #f8f9fa; border-top: 1px solid #eeeeee;">
+            <p style="margin: 0; font-size: 12px; line-height: 18px; color: #888888; text-align: center;">
+                © {{current_year}} {{company_name}}. Все права защищены.<br>
+                Возникли вопросы? Напишите нам: <a href="mailto:support@example.com" style="color: #0066cc; text-decoration: none;">support@example.com</a>
+            </p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
