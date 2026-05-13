@@ -8,7 +8,7 @@ export class AuthController {
     }
 
     @Post('login')
-    login(@Body() data: LoginDto): AccessDto {
+    login(@Body() data: LoginDto): Promise<AccessDto> {
         return this.authService.login(data);
     }
 }
