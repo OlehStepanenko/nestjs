@@ -1,13 +1,15 @@
 import {Body, Controller, Get, Param, Post, Put, UseGuards} from "@nestjs/common";
 import {UsersService} from "./users.service";
 import {BanUserDto, CreateUserDto, UserRole, ViewUserDto} from "./dto";
-import {IdParamDto, AccessGuard, Roles, User} from "src/common";
+import {IdParamDto, AccessGuard, Roles, User, SWAGGER_BEARER_NAME} from "src/common";
 import type {JWTUser} from "src/auth/models";
+import {ApiBearerAuth} from "@nestjs/swagger";
 
 
 @Controller('users')
 @Roles(UserRole.Admin)
 @UseGuards(AccessGuard)
+@ApiBearerAuth(SWAGGER_BEARER_NAME)
 export class UsersController {
     constructor(private readonly usersService: UsersService) {
     }
