@@ -1,17 +1,22 @@
-import {Body, Controller, Get, Param, Post, Put} from "@nestjs/common";
+import {Body, Controller, Get, Param, Post, Put, UseGuards} from "@nestjs/common";
 import {UsersService} from "./users.service";
-import {BanUserDto, CreateUserDto, ViewUserDto} from "./dto";
-import {IdParamDto} from "../common";
+import {BanUserDto, CreateUserDto, UserRole, ViewUserDto} from "./dto";
+import {IdParamDto, AccessGuard, Roles, User} from "src/common";
+import type {JWTUser} from "src/auth/models";
 
 
 @Controller('users')
+@Roles(UserRole.Admin)
+@UseGuards(AccessGuard)
 export class UsersController {
     constructor(private readonly usersService: UsersService) {
     }
 
     @Post()
-    create(@Body() data: CreateUserDto): Promise<ViewUserDto> {
-        return this.usersService.create(data);
+    create(
+        @User() {userId}: JWTUser,
+        @Body() data: CreateUserDto): Promise<ViewUserDto> {
+        return this.usersService.create(data, userId);
     }
 
     @Get()

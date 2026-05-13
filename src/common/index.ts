@@ -1,3 +1,5 @@
 export * from './dto'
 export * from './config'
 export * from './models'
+export * from './guards'
+export * from './decorators'

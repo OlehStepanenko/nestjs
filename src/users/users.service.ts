@@ -19,7 +19,7 @@ export class UsersService {
     ) {
     }
 
-    async create(data: CreateUserDto): Promise<ViewUserDto> {
+    async create(data: CreateUserDto, createdBy: string): Promise<ViewUserDto> {
         await this.checkEmail(data.email)
         const user = await this.prisma.user.create({
             data: {
@@ -29,7 +29,7 @@ export class UsersService {
                 lastName: data.lastName,
                 email: data.email,
                 status: UserStatus.active,
-                createdBy: randomUUID(),
+                createdBy,
             }
         })
 
